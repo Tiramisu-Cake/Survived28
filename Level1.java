@@ -30,6 +30,6 @@ public class Level1 {
 
     }
     public static int ConquestCampaign(int N, int M, int L, int [] battalion) {
-
+    return 2;
     }
 }
