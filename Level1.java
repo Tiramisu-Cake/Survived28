@@ -27,4 +27,7 @@ public class Level1 {
         }
         return S;
     }
+    public static int ConquestCampaign(int N, int M, int L, int [] battalion) {
+
+    }
 }
