@@ -13,7 +13,7 @@ public class Level1 {
         double int_part = (int) log_Frac;
         log_Frac = log_Frac - int_part;
 
-        // fimding the first digit of N!
+        // finding the first digit of N!
         double z = Math.pow(10,log_Frac);
         int x = (int) z;
         while(x >= 10)
