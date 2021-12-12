@@ -20,14 +20,22 @@ public class Level1 {
             x /= 10;
         return x;
     }
+<<<<<<< HEAD
     public static int odometer(int [] oksana) {
+=======
+   public static int odometer(int [] oksana) {
+>>>>>>> f0381226203cbfa4dcab5ee5247b10104787c96f
         int S = oksana[0]*oksana[1];
         for(int i = 2; i<oksana.length; i = i + 2) {
             S += oksana[i] * (oksana[i+1] - oksana[i-1]);
         }
         return S;
+<<<<<<< HEAD
     }
     public static int ConquestCampaign(int N, int M, int L, int [] battalion) {
 
     }
+=======
+    }  
+>>>>>>> f0381226203cbfa4dcab5ee5247b10104787c96f
 }
