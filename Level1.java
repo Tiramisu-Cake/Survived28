@@ -1,4 +1,5 @@
 package com.company;
+
 public class Level1 {
     public static int squirrel(int N) {
         if(N == 0) {
@@ -29,7 +30,54 @@ public class Level1 {
         return S;
 
     }
+
     public static int ConquestCampaign(int N, int M, int L, int [] battalion) {
-    return 2;
+
+        int[][] map = new int[N][M];
+        for(int i = 0; i <2*L; i+=2) {
+            map[battalion[i]-1][battalion[i+1]-1] = 1;
+        }
+
+        int n = L;
+        int days = 1;
+
+        while(n < N*M) {
+            for(int i = 0; i <N; i++) {
+                for(int j = 0; j < M; j++) {
+                    if (map[i][j] == 1) {
+                        if (i > 0) {
+                            if(map[i - 1][j] == 0) {
+                                map[i - 1][j] = 2;
+                            }
+                        }
+                        if (j > 0) {
+                            if(map[i][j - 1] == 0) {
+                                map[i][j - 1] = 2;
+                            }
+                        }
+                        if (i < N - 1) {
+                            if (map[i + 1][j] == 0) {
+                                map[i + 1][j] = 2;
+                            }
+                        }
+                        if (j < M - 1) {
+                            if (map[i][j + 1] == 0) {
+                                map[i][j + 1] = 2;
+                            }
+                        }
+                    }
+                }
+            }
+            for(int i = 0; i <N; i++) {
+                for (int j = 0; j < M; j++) {
+                    if(map[i][j] == 2) {
+                        map[i][j] = 1;
+                        n++;
+                    }
+                }
+            }
+            days++;
+        }
+        return days;
     }
 }
