@@ -1,6 +1,7 @@
 package com.company;
 
 public class Level1 {
+    // TASK 1
     public static int squirrel(int N) {
         if(N == 0) {
             return 1;
@@ -22,6 +23,7 @@ public class Level1 {
         return x;
     }
 
+    // TASK 2
     public static int odometer(int [] oksana) {
         int S = oksana[0]*oksana[1];
         for(int i = 2; i<oksana.length; i += 2) {
@@ -31,6 +33,7 @@ public class Level1 {
 
     }
 
+    //TASK 3
     public static int ConquestCampaign(int N, int M, int L, int [] battalion) {
 
         int[][] map = new int[N][M];
@@ -79,5 +82,57 @@ public class Level1 {
             days++;
         }
         return days;
+    }
+
+    // TASK 4
+
+    public static void swap(int [] Arr, int i1, int i2) {
+        int x = Arr[i1];
+        Arr[i1] = Arr[i2];
+        Arr[i2] = x;
+    }
+    public static int [] MadMax(int N, int [] Tele) {
+        int mid = N / 2;
+        int [] Tele_copy = new int[N];
+        for(int i = 0; i < N; i++) {
+            Tele_copy[i] = Tele[i];
+        }
+        int max = 0;
+        int min = 255;
+        int i_max = 0;
+        int i_min = 0;
+
+        for(int i = 0; i < N; i++){
+            if (Tele_copy[i] > max) {
+                max = Tele_copy[i];
+                i_max = i;
+            }
+            if(Tele_copy[i] < min) {
+                min = Tele_copy[i];
+                i_min = i;
+            }
+        }
+
+        swap(Tele_copy, mid, i_max);
+        swap(Tele_copy, 0, i_min);
+
+        for (int i = 1; i < N; i++) {
+            if (i < mid) {
+                for (int j = i + 1; j < N; j++) {
+                    if (Tele_copy[j] < Tele_copy[i]) {
+                        swap(Tele_copy, i, j);
+                    }
+                }
+            }
+            if(i == mid) continue;
+            if (i > mid) {
+                for(int j = i + 1; j < N; j++) {
+                    if(Tele_copy[j] > Tele_copy[i]) {
+                        swap(Tele_copy, i, j);
+                    }
+                }
+            }
+        }
+        return Tele_copy;
     }
 }
