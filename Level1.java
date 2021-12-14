@@ -135,4 +135,38 @@ public class Level1 {
         }
         return Tele_copy;
     }
+
+    // TASK 5
+
+    public static int [] SynchronizingTables(int N, int [] ids, int [] salary) {
+        int[] ids_c = new int[N];
+        int[] sal_c = new int[N];
+
+        for (int i = 0; i < N; i++) {
+            ids_c[i] = ids[i];
+            sal_c[i] = salary[i];
+        }
+
+        for (int i = 0; i < N; i++) {
+            for (int j = i + 1 ; j < N; j++) {
+                if(ids[i] > ids[j]) {
+                    swap(ids_c, i, j);
+                }
+                if(salary[i] > salary[j]) {
+                    swap(sal_c, i, j);
+                }
+            }
+        }
+        int[] res = new int[N];
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if(ids[i] == ids_c[j]) {
+                    res[i] = sal_c[j];
+                }
+            }
+        }
+
+        return res;
+    }
 }
