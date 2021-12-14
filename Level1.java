@@ -170,4 +170,43 @@ public class Level1 {
 
         return res;
     }
+
+    // TASK 6
+
+    public static String PatternUnlock(int N, int [] hits) {
+        int[][] map = {{6,1,9},{5,2,8},{4,3,7}};
+        double path = 0;
+        for (int i = 0; i < N - 1; i++) {
+            int x = hits[i];
+            int y = hits[i+1];
+            int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    if(x == map[j][k]) {
+                        x1 = j;
+                        x2 = k;
+                    }
+                    if(y == map[j][k]) {
+                        y1 = j;
+                        y2 = k;
+                    }
+                }
+            }
+            if(x1 != y1 && x2 !=y2) {
+                path += Math.sqrt(2);
+            } else {
+                path += 1;
+            }
+        }
+
+        String path_str = String.format("%.5f",path);
+        String res = "";
+        for (int i = 0; i < path_str.length(); i++) {
+            if(path_str.charAt(i) != '0' && path_str.charAt(i) != ',') {
+                res += path_str.charAt(i);
+            }
+        }
+
+        return res;
+    }
 }
