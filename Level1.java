@@ -149,14 +149,15 @@ public class Level1 {
 
         for (int i = 0; i < N; i++) {
             for (int j = i + 1 ; j < N; j++) {
-                if(ids[i] > ids[j]) {
+                if(ids_c[j] < ids_c[i]) {
                     swap(ids_c, i, j);
                 }
-                if(salary[i] > salary[j]) {
+                if(sal_c[j] < sal_c[i]) {
                     swap(sal_c, i, j);
                 }
             }
         }
+
         int[] res = new int[N];
 
         for (int i = 0; i < N; i++) {
