@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Level1 {
     // TASK 1
     public static int squirrel(int N) {
@@ -208,5 +210,96 @@ public class Level1 {
         }
 
         return res;
+    }
+
+    // TASK 7
+
+    static boolean sublineFinder(String line1, String line2) {
+
+        int l2Len = line2.length();
+
+        if(l2Len == 0) {
+            return true;
+        }
+
+        int l1Len = line1.length();
+        int sublinesNum = l1Len - l2Len + 1;
+
+        int i = 0;
+        int j = 0;
+        while(i < sublinesNum) {
+            if(line1.charAt(i+j) != line2.charAt(j)) {
+                j = 0;
+                i++;
+            } else {
+                if(j == l2Len - 1) {
+                    if (i+j == l1Len) {
+                        return true;
+                    }
+                    if(l1Len > i+j && line1.charAt(i+j+1) == ' ') {
+                        return true;
+                    }
+                    j = -1;
+                    i++;
+                }
+                j++;
+            }
+        }
+
+        return false;
+    }
+
+    public static int [] WordSearch(int len, String s, String subs) {
+
+        int n = s.length();
+
+        ArrayList<ArrayList<Character>> strArr = new ArrayList<ArrayList<Character>>();
+        int j = 0;
+        ArrayList<Character> C = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int nextWordLen = 0;
+            if (s.charAt(i) != ' ') {
+                C.add(s.charAt(i));
+            } else {
+                for (int k = i + 1; k < n; k++ ) {
+                    if(s.charAt(k) == ' ') {
+                        break;
+                    } else {
+                        nextWordLen++;
+                    }
+                }
+                if(C.size() + nextWordLen + 1 > len) {
+                    strArr.add(C);
+                    j++;
+                    C = new ArrayList<>();
+                } else {
+                    C.add(s.charAt(i));
+                }
+            }
+            if (i == n - 1) {
+                strArr.add(C);
+                j++;
+            }
+        }
+
+        String[] strArr2 = new String[j];
+        for (int i = 0; i < j; i++) {
+            strArr2[i] = "";
+            for (int k = 0; k < strArr.get(i).size(); k++) {
+                strArr2[i] += strArr.get(i).get(k);
+            }
+        }
+
+        int[] res = new int[j];
+        for (int i = 0; i < j; i++) {
+            if (sublineFinder(strArr2[i],subs) == true) {
+                res[i] = 1;
+            } else {
+                res[i] = 0;
+            }
+        }
+        return res;
+
     }
 }
