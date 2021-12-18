@@ -233,11 +233,13 @@ public class Level1 {
                 i++;
             } else {
                 if(j == l2Len - 1) {
-                    if (i+j == l1Len) {
+                    if (i+j == l1Len - 1) {
                         return true;
                     }
-                    if(l1Len > i+j && line1.charAt(i+j+1) == ' ') {
-                        return true;
+                    if(l1Len > i+j + 1) {
+                        if (line1.charAt(i + j + 1) == ' ') {
+                            return true;
+                        }
                     }
                     j = -1;
                     i++;
@@ -277,9 +279,18 @@ public class Level1 {
                     C.add(s.charAt(i));
                 }
             }
+
             if (i == n - 1) {
                 strArr.add(C);
                 j++;
+            }
+            if (C.size() == len) {
+                strArr.add(C);
+                j++;
+                C = new ArrayList<>();
+                if (i < n-1 && s.charAt(i+1) == ' ') {
+                    i++;
+                }
             }
         }
 
