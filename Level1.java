@@ -313,4 +313,22 @@ public class Level1 {
         return res;
 
     }
+
+    // TASK 8
+
+    public static int SumOfThe(int N, int [] data) {
+        int res = 0;
+        for (int i = 0; i < N; i++) {
+            int checksum = 0;
+            for (int j = 0; j < N; j++) {
+                if (i != j) {
+                    checksum += data[j];
+                }
+            }
+            if (checksum == data[i]) {
+                res = data[i];
+            }
+        }
+        return res;
+    }
 }
