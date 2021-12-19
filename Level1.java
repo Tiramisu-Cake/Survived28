@@ -476,6 +476,16 @@ public class Level1 {
 
     public static String BigMinus(String s1, String s2) {
 
+        if (s1.equals(s2)) {
+            return "0";
+        }
+        if (s1.equals("0")) {
+            return s2;
+        }
+        if (s2.equals("0")) {
+            return s1;
+        }
+
         String ss1 = "";
         String ss2 = "";
 
