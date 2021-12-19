@@ -471,4 +471,70 @@ public class Level1 {
 
         return ton;
     }
+
+    // TASK 11
+
+    public static String BigMinus(String s1, String s2) {
+
+        String ss1 = "";
+        String ss2 = "";
+
+        for (int i = s1.length() - 1; i >= 0; i--) {
+            ss1 += s1.charAt(i);
+        }
+        for (int i = s2.length() - 1; i >= 0; i--) {
+            ss2 += s2.charAt(i);
+        }
+
+        if (s1.length() < s2.length()) {
+            String s = new String(ss1);
+            ss1 = ss2;
+            ss2 = s;
+        }
+
+        char[] c1 = ss1.toCharArray();
+        char[] c2 = ss2.toCharArray();
+        int n1 = c1.length;
+        int n2 = c2.length;
+        String str = "";
+        int k = 0;
+        for (int i = 0; i < n2; i++) {
+            int x = c1[i] - '0';
+            int y = c2[i] - '0';
+            if (x >= y) {
+                str += x-y;
+                k++;
+            } else {
+                for (int j = i + 1; j < n1; j++) {
+                    if (c1[j] == '0') {
+                        c1[j] = '9';
+                    } else {
+                        int z = c1[j] - '0';
+                        z--;
+                        c1[j] = (char)(z + '0') ;
+                        str += 10 + x - y;
+                        k++;
+                        j = n1;
+                    }
+                }
+            }
+        }
+
+        for (int i = k; i < n1; i++) {
+            str += c1[i];
+        }
+
+        String res = "";
+        k = 0;
+        for (int i = str.length() - 1; i >= 0; i--) {
+            if (str.charAt(i) != '0') {
+                k = 1;
+            }
+            if (k != 0) {
+                res += str.charAt(i);
+            }
+        }
+
+        return res;
+    }
 }
