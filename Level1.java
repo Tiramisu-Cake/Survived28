@@ -412,4 +412,63 @@ public class Level1 {
 
         return res;
     }
+
+    // TASK 10
+
+    public static int PrintingCosts(String Line) {
+
+        String[] table = new String[33];
+        table[0] = " ";
+        table[3] = "`'";
+        table[4] = ".";
+        table[6] = "\"";
+        table[7] = ",-^";
+        table[8] = ":_";
+        table[9] = "!~";
+        table[10] = "<>/\\";
+        table[11] = ";";
+        table[12] = "()|";
+        table[13] = "vrx+";
+        table[14] = "Y=";
+        table[15] = "?i";
+        table[16] = "LlT7";
+        table[17] = "tcu*";
+        table[18] = "[]{}JXIfn";
+        table[19] = "1Vzw";
+        table[20] = "ojFC";
+        table[21] = "Kksh4";
+        table[22] = "20%Zm";
+        table[23] = "83PUea";
+        table[24] = "Ay&#";
+        table[25] = "GSHNbdpq";
+        table[26] = "96DEWO";
+        table[27] = "5";
+        table[28] = "RM";
+        table[29] = "$B";
+        table[30] = "g";
+        table[31] = "Q";
+        table[32] = "@";
+
+        int ton = 0;
+        int n = Line.length();
+        for (int i = 0; i < n; i++) {
+            int f = 0;
+            for (int j = 0; j < table.length - 1; j++) {
+                if (table[j] == null) {
+                    continue;
+                }
+                for (int k = 0; k < table[j].length(); k++) {
+                    if (Line.charAt(i) == table[j].charAt(k)) {
+                        ton += j;
+                        f = 1;
+                    }
+                }
+            }
+            if (f == 0) {
+                ton += 23;
+            }
+        }
+
+        return ton;
+    }
 }
