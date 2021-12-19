@@ -374,7 +374,7 @@ public class Level1 {
                     if (c[j][i] != '\u0000') {
                         res += c[j][i];
                     }
-                    if (j == up - 1) {
+                    if (j == up - 1 && i != low - 1) {
                         res += ' ';
                     }
                 }
