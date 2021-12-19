@@ -331,4 +331,85 @@ public class Level1 {
         }
         return res;
     }
+
+    // TASK 9
+
+    public static String TheRabbitsFoot(String s, boolean encode) {
+
+        int n = s.length();
+        String str = "";
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) != ' ') {
+                str += s.charAt(i);
+            }
+        }
+
+        int len = str.length();
+        double sqlen = Math.sqrt(len);
+        int low = (int) sqlen;
+        int up = low + 1;
+        while (low * up < len) {
+            low++;
+        }
+
+        String res = "";
+        char[][] c = new char[low][up];
+
+        if (encode == true) {
+            int i = 0;
+            int j = 0;
+            for (int k = 0; k < len; k++) {
+                c[i][j] = str.charAt(k);
+                if (j == up - 1) {
+                    i++;
+                    j = 0;
+                } else {
+                    j++;
+                }
+
+            }
+
+            for (i = 0; i < low; i++) {
+                for (j = 0; j < up; j++) {
+                    if (c[j][i] != '\u0000') {
+                        res += c[j][i];
+                    }
+                    if (j == up - 1) {
+                        res += ' ';
+                    }
+                }
+            }
+
+        } else {
+            int k = 0;
+            for (int i = 0; i < up; i++ ) {
+                if (k == n) {
+                    break;
+                }
+                for (int j = 0; j < low; j++) {
+                    if (k == n) {
+                        break;
+                    }
+                    if (s.charAt(k) != ' ') {
+                        c[j][i] = s.charAt(k);
+                    } else {
+                        if (j == 0) {
+                            j--;
+                        }
+                    }
+                    k++;
+                }
+            }
+
+            for (int i = 0; i < low; i++) {
+                for (int j = 0; j < up; j++) {
+                    if (c[i][j] != '\u0000') {
+                        res += c[i][j];
+                    }
+                }
+            }
+        }
+
+        return res;
+    }
 }
