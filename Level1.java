@@ -547,4 +547,45 @@ public class Level1 {
 
         return res;
     }
+
+    // TASK 12
+
+    public static String MassVote(int N, int [] Votes) {
+        int total = 0;
+        for (int i = 0; i < N; i++) {
+            total += Votes[i];
+        }
+
+        double[] VotesPerc = new double[N];
+        for (int i = 0; i < N; i++) {
+            double a = (Votes[i] / (total * 1.0) ) * 100;
+            String s = String.format("%.3f",a);
+            VotesPerc[i] += Double.parseDouble(s.replace(",","."));
+        }
+
+        int k = 0;
+        String res = "";
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (i != j && VotesPerc[i] > VotesPerc[j]) {
+                    k++;
+                }
+            }
+            if (k == N - 1) {
+                if (VotesPerc[i] > 50) {
+                    res += "majority winner " + (i + 1);
+                } else {
+                    res += "minority winner " + (i + 1);
+                }
+            }
+            if (!res.equals("")) {
+                break;
+            }
+            k = 0;
+        }
+        if (res.equals("")) {
+            return "no winner";
+        }
+        return res;
+    }
 }
