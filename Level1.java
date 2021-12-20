@@ -620,4 +620,39 @@ public class Level1 {
 
         return res;
     }
+
+    // TASK 14
+
+    public static int Unmanned(int L, int N, int [][] track) {
+       int[] wait_time = new int[N]; // how many seconds to spend on each traffic light
+
+       for (int i = 0; i < N; i++) {
+           int x;
+           if (i == 0) {
+               x = track[0][0];
+           } else {
+               x = wait_time[i - 1] + track[i][0];
+           }
+           int j = 1;
+           while (x >= track[i][j]) {
+               x -= track[i][j];
+               j = 3 - j;
+           }
+           j = 3 - j;
+
+           if (j == 1 && x >= track[i][3 - j]) {
+               wait_time[i] = x;
+           }
+           if (j == 2) {
+               wait_time[i] = track[i][3 - j] - x;
+           }
+       }
+
+       int res = L;
+       for (int i = 0; i < N; i++) {
+           res += wait_time[i];
+       }
+
+       return res;
+    }
 }
