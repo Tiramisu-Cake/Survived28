@@ -588,4 +588,36 @@ public class Level1 {
         }
         return res;
     }
+
+    // TASK 13
+
+    public static int [] UFO(int N, int [] data, boolean octal) {
+        int[] res = new int[N];
+
+        if (octal == true) {
+
+            for (int i = 0; i < N; i++) {
+                String S = "" + data[i];
+                char[] c = S.toCharArray();
+                int k = c.length;
+                for (int j = 0; j < k; j++) {
+                    res[i] += (c[j] - '0') * Math.pow(8, k - 1 - j);
+                }
+            }
+
+        } else {
+
+            for (int i = 0; i < N; i++) {
+                String S = "" + data[i];
+                char[] c = S.toCharArray();
+                int k = c.length;
+                for (int j = 0; j < k; j++) {
+                    res[i] += (c[j] - '0') * Math.pow(16, k - 1 - j);
+                }
+            }
+
+        }
+
+        return res;
+    }
 }
