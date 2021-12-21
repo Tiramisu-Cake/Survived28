@@ -650,7 +650,9 @@ public class Level1 {
 
        int res = L;
        for (int i = 0; i < N; i++) {
-           res += wait_time[i];
+           if (L >= track[i][0]) {
+               res += wait_time[i];
+           }
        }
 
        return res;
