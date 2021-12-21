@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Level1 {
     // TASK 1
@@ -656,5 +657,60 @@ public class Level1 {
        }
 
        return res;
+    }
+
+    // TASK 15
+
+    public static boolean TankRush(int H1, int W1, String S1, int H2, int W2, String S2) {
+        if (W2 > W1 || H2 > H1) {
+            return false;
+        }
+
+        char[][] arrS1 = new char[H1][W1];
+        char[][] arrS2 = new char[H2][W2];
+
+        int k = 0;
+        for (int i = 0; i < H1; i++) {
+            for (int j = 0; j < W1; j++) {
+                arrS1[i][j] = S1.charAt(k);
+                k++;
+                if (j == W1 - 1) {
+                    k++;
+                }
+            }
+        }
+
+        k = 0;
+        for (int i = 0; i < H2; i++) {
+            for (int j = 0; j < W2; j++) {
+                arrS2[i][j] = S2.charAt(k);
+                k++;
+                if (j == W2 - 1) {
+                    k++;
+                }
+            }
+        }
+
+        for (int i = 0; i < H1; i++) {
+            for (int j = 0; j < W1; j++) {
+
+                if (arrS1[i][j] == arrS2[0][0] && (H1 - i) >= H2 && (W1 - j) >= W2) {
+
+                    char[][] C = new char[H2][W2];
+                    for (int s = 0; s < H2; s++) {
+                        for (int t = 0; t < W2; t++) {
+                            C[s][t] = arrS1[i+s][j+t];
+                        }
+                    }
+
+                    if (Arrays.deepEquals(C, arrS2)) {
+                        return true;
+                    }
+
+                }
+            }
+        }
+
+        return false;
     }
 }
