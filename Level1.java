@@ -713,4 +713,37 @@ public class Level1 {
 
         return false;
     }
+
+    // TASK 16
+
+    public static int MaximumDiscount(int N, int [] price) {
+        int[] p_copy = price;
+
+        for (int i = 0; i < N; i++) {
+            for (int j = i; j < N; j++) {
+                if (p_copy[i] > p_copy[j]) {
+                    int x = p_copy[i];
+                    p_copy[i] = p_copy[j];
+                    p_copy[j] = x;
+                }
+            }
+        }
+
+        int free_num =  N / 3;
+        int discount1 = 0;
+        for (int i = 0; i < free_num; i++) {
+            discount1 += p_copy[i];
+        }
+
+        int discount2 = 0;
+        for (int i = N - 3; i >= 0; i = i - 3) {
+            discount2 += p_copy[i];
+        }
+
+        if (discount1 > discount2) {
+            return discount1;
+        }
+        return  discount2;
+
+    }
 }
