@@ -746,4 +746,51 @@ public class Level1 {
         return  discount2;
 
     }
+
+    // TASK 17
+
+    public static boolean LineAnalysis(String line) {
+        int n = line.length();
+        if (line.lastIndexOf('*') != n - 1 || line.indexOf('*') != 0) {
+            return false;
+        }
+
+        int star = 0;
+        for (int i = 0; i < n; i++) {
+            if (line.charAt(i) == '*') {
+                star++;
+            }
+        }
+        if (star == n) {
+            return true;
+        }
+
+        int dot_pattern = 0;
+        for (int i = 1; i < n; i++) {
+                if (line.charAt(i) == '.') {
+                    dot_pattern++;
+                } else {
+                    break;
+                }
+        }
+
+        if (dot_pattern == 0) {
+            return false;
+        }
+
+        boolean res = true;
+        for (int i = dot_pattern + 2; i < n; i += dot_pattern + 1) {
+            for (int j = 0; j < dot_pattern; j++) {
+                if (line.charAt(i + j) != '.') {
+                    res = false;
+                    break;
+                }
+            }
+            if (res == false) {
+                break;
+            }
+        }
+
+        return res;
+    }
 }
