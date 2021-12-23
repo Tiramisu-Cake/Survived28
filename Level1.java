@@ -793,4 +793,46 @@ public class Level1 {
 
         return res;
     }
+
+    // TASK 18
+
+    public static void leftRound(int[] A, int c) {
+        int l = A[c-1];
+        A[c-1] = A[c];
+        A[c] = A[c+1];
+        A[c+1] = l;
+    }
+    public static boolean MisterRobot(int N, int [] data) {
+        int[] data_c = data;
+
+        boolean res = true;
+        for (int i = N - 1; i >= 0; i--) {
+            int j = 0;
+            if (data_c[i] != i + 1) {
+                for (int k = i - 1; k >= 0; k--) {
+                    if (data_c[k] == i + 1) {
+                        j = k;
+                        break;
+                    }
+                }
+                while (j != i) {
+                    if (j == 0 && i == 1) {
+                        res = false;
+                        break;
+                    }
+                    if (i - j > 1) {
+                        leftRound(data_c, j + 1);
+                        j += 2;
+                    } else {
+                        leftRound(data_c, j);
+                        j--;
+                    }
+                }
+                if (res == false) {
+                    break;
+                }
+            }
+        }
+        return res;
+    }
 }
