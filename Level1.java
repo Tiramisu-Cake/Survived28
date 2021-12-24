@@ -885,11 +885,40 @@ public class Level1 {
             }
         }
 
+        int n = items_c.size();
+        for (int i = 0; i < n-1; i++) {
+
+            String S1_p = CutAfterLastSpace(items_c.get(i));
+            int p1 = Integer.parseInt(S1_p);
+
+            for (int j = i + 1; j < n; j++) {
+
+                String S2_p = CutAfterLastSpace(items_c.get(j));
+                int p2 = Integer.parseInt(S2_p);
+                if (p1 < p2) {
+                    String S1 = items_c.get(j);
+                    String S2 = items_c.get(i);
+                    items_c.remove(i);
+                    items_c.add(i, S1);
+                    items_c.remove(j);
+                    items_c.add(j, S2);
+                }
+            }
+        }
+
+
         String[] res = items_c.toArray(new String[0]);
         for (int i = 0; i<res.length - 1; i++) {
+
+            String S1 = CutAfterLastSpace(items_c.get(i));
+
             for (int j = i + 1; j< res.length; j++) {
-                if (res[i].compareTo(res[j]) > 0) {
-                    swapString(res, i, j);
+
+                String S2 = CutAfterLastSpace(items_c.get(j));
+                if (S1.equals(S2)) {
+                    if (S1.compareTo(S2) > 0) {
+                        swapString(res, i, j);
+                    }
                 }
             }
         }
