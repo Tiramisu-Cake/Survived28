@@ -89,7 +89,7 @@ public class Level1 {
 
     // TASK 4
 
-    public static void swap(int [] Arr, int i1, int i2) {
+    public static void swapInt(int[] Arr, int i1, int i2) {
         int x = Arr[i1];
         Arr[i1] = Arr[i2];
         Arr[i2] = x;
@@ -116,14 +116,14 @@ public class Level1 {
             }
         }
 
-        swap(Tele_copy, mid, i_max);
-        swap(Tele_copy, 0, i_min);
+        swapInt(Tele_copy, mid, i_max);
+        swapInt(Tele_copy, 0, i_min);
 
         for (int i = 1; i < N; i++) {
             if (i < mid) {
                 for (int j = i + 1; j < N; j++) {
                     if (Tele_copy[j] < Tele_copy[i]) {
-                        swap(Tele_copy, i, j);
+                        swapInt(Tele_copy, i, j);
                     }
                 }
             }
@@ -131,7 +131,7 @@ public class Level1 {
             if (i > mid) {
                 for(int j = i + 1; j < N; j++) {
                     if(Tele_copy[j] > Tele_copy[i]) {
-                        swap(Tele_copy, i, j);
+                        swapInt(Tele_copy, i, j);
                     }
                 }
             }
@@ -153,10 +153,10 @@ public class Level1 {
         for (int i = 0; i < N; i++) {
             for (int j = i + 1 ; j < N; j++) {
                 if(ids_c[j] < ids_c[i]) {
-                    swap(ids_c, i, j);
+                    swapInt(ids_c, i, j);
                 }
                 if(sal_c[j] < sal_c[i]) {
-                    swap(sal_c, i, j);
+                    swapInt(sal_c, i, j);
                 }
             }
         }
@@ -833,6 +833,67 @@ public class Level1 {
                 }
             }
         }
+        return res;
+    }
+
+    // TASK 19
+    public static String CutToLastSpace (String S) {
+        int n = S.lastIndexOf(' ');
+        String Line = "";
+        for (int i = 0; i < n + 1; i++) {
+            Line += S.charAt(i);
+        }
+        return Line;
+    }
+    public static String CutAfterLastSpace (String S) {
+        int n = S.lastIndexOf(' ');
+        String Line = "";
+        for (int i = n+1; i < S.length(); i++) {
+            Line += S.charAt(i);
+        }
+        return Line;
+    }
+
+    public static void swapString(String[] Arr, int i1, int i2) {
+        String x = Arr[i1];
+        Arr[i1] = Arr[i2];
+        Arr[i2] = x;
+    }
+    public static String [] ShopOLAP(int N, String [] items) {
+
+        ArrayList<String> items_c = new ArrayList<>(Arrays.asList(items));
+
+        for (int i = 0; i<N-1; i++) {
+
+            String S1 = CutToLastSpace(items_c.get(i));
+            String S1_p = CutAfterLastSpace(items_c.get(i));
+            int p1 = Integer.parseInt(S1_p);
+
+            for (int j = i + 1; j< items_c.size(); j++) {
+
+                String S2 = CutToLastSpace(items_c.get(j));
+                if (S1.equals(S2)) {
+                    String S2_p = CutAfterLastSpace(items_c.get(j));
+                    int p2 = Integer.parseInt(S2_p);
+                    int p = p1 + p2;
+                    String S = S1 + p;
+                    items_c.add(i,S);
+                    items_c.remove(i+1);
+                    items_c.remove(j);
+                }
+
+            }
+        }
+
+        String[] res = items_c.toArray(new String[0]);
+        for (int i = 0; i<res.length - 1; i++) {
+            for (int j = i + 1; j< res.length; j++) {
+                if (res[i].compareTo(res[j]) > 0) {
+                    swapString(res, i, j);
+                }
+            }
+        }
+
         return res;
     }
 }
