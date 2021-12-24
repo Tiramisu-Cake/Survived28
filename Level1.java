@@ -863,7 +863,7 @@ public class Level1 {
 
         ArrayList<String> items_c = new ArrayList<>(Arrays.asList(items));
 
-        for (int i = 0; i<N-1; i++) {
+        for (int i = 0; i< items_c.size(); i++) {
 
             String S1 = CutToLastSpace(items_c.get(i));
             String S1_p = CutAfterLastSpace(items_c.get(i));
@@ -875,15 +875,16 @@ public class Level1 {
                 if (S1.equals(S2)) {
                     String S2_p = CutAfterLastSpace(items_c.get(j));
                     int p2 = Integer.parseInt(S2_p);
-                    int p = p1 + p2;
-                    String S = S1 + p;
+                    p1 += p2;
+                    String S = S1 + p1;
                     items_c.add(i,S);
                     items_c.remove(i+1);
                     items_c.remove(j);
+                    j--;
                 }
-
             }
         }
+
 
         int n = items_c.size();
         for (int i = 0; i < n-1; i++) {
@@ -916,7 +917,9 @@ public class Level1 {
 
                 String S2 = CutAfterLastSpace(items_c.get(j));
                 if (S1.equals(S2)) {
-                    if (S1.compareTo(S2) > 0) {
+                    String S1_1 = CutToLastSpace(items_c.get(i));
+                    String S2_1 = CutToLastSpace(items_c.get(j));
+                    if (S1_1.compareTo(S2_1) > 0) {
                         swapString(res, i, j);
                     }
                 }
