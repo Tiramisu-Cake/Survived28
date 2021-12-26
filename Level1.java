@@ -957,7 +957,7 @@ public class Level1 {
             x = -1;
         }
 
-        if(x == 1 && n > 1) {
+        if(x == 1 && n > 2) {
 
 
             if (u == 1) {
@@ -978,7 +978,7 @@ public class Level1 {
         }
 
 
-        if (x == 2 && n > 1) {
+        if (x == 2 && n > 2) {
 
 
             if (u == 1) {
@@ -1011,7 +1011,7 @@ public class Level1 {
 
         }
 
-        if (x == 3) {
+        if (x == 3 && n > 2) {
 
             String S1 = "";
             for (int i = 2; i < n; i++) {
@@ -1030,7 +1030,7 @@ public class Level1 {
                 return "";
             }
 
-            S = String.valueOf(S.charAt(y));
+            return String.valueOf(S.charAt(y));
 
         }
         if (x == 4 && n == 1) {
