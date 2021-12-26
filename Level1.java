@@ -928,4 +928,152 @@ public class Level1 {
 
         return res;
     }
+
+    // TASK 20
+
+    static String S = "";
+    //static ArrayList<String> log = new ArrayList<>();
+    static ArrayList<String> Slog = new ArrayList<>();
+    static int c = -1;
+    static int u = 0;
+
+    public static String BastShoe(String command) {
+
+        if (Slog.size() == 0) {
+            Slog.add("");
+        }
+        String p = "" + command.charAt(0);
+        try {
+            int x = Integer.parseInt(p);
+        }
+        catch (Exception e) {
+            return S;
+        }
+        int x = Integer.parseInt(p);
+
+
+
+        String res = "";
+        int n = command.length();
+
+        if(x == 1) {
+
+            if (command.charAt(1) != ' ') {
+                return S;
+            }
+
+            if (u == 1) {
+                u = 0;
+                Slog.clear();
+                Slog.add(S);
+            }
+            String S1 = "";
+            for (int i = 2; i < n; i++) {
+                S1 += command.charAt(i);
+            }
+            S += S1;
+
+
+            Slog.add(S);
+            c = Slog.size() - 1;
+
+        }
+
+
+        if (x == 2) {
+
+            if (command.charAt(1) != ' ') {
+                return S;
+            }
+            if (u == 1) {
+                u = 0;
+                Slog.clear();
+                Slog.add(S);
+            }
+            String S1 = "";
+            for (int i = 2; i < n; i++) {
+                S1 += command.charAt(i);
+            }
+            try {
+                int y = Integer.parseInt(S1);
+            }
+            catch (Exception e) {
+                return S;
+            }
+            int y = Integer.parseInt(S1);
+            if (y >= S.length()) {
+                S = "";
+            } else {
+                S1 = "";
+                for (int i = 0; i < S.length() - y; i++) {
+                    S1 += S.charAt(i);
+                }
+                S = S1;
+            }
+
+            Slog.add(S);
+            c = Slog.size() - 1;
+        }
+
+        if (x == 3) {
+
+            if (command.charAt(1) != ' ') {
+                return S;
+            }
+
+            String S1 = "";
+            for (int i = 2; i < n; i++) {
+                S1 += command.charAt(i);
+            }
+            try {
+                int y = Integer.parseInt(S1);
+            }
+            catch (Exception e) {
+                return S;
+            }
+            int y = Integer.parseInt(S1);
+
+            if (y >= S.length() || y < 0) {
+                return "";
+            }
+
+            return String.valueOf(S.charAt(y));
+
+        }
+        if (x == 4) {
+
+            if (command.length() > 1) {
+                return S;
+            }
+
+            u = 1;
+            int k = Slog.size();
+            if (k > 0 && c > 0) {
+                c--;
+                S = Slog.get(c);
+            }
+            if (c == 0) {
+                return S;
+            }
+
+
+        }
+        if (x == 5) {
+
+            if (command.length() > 1) {
+                return S;
+            }
+
+            int k = Slog.size();
+            if (k > c + 1) {
+                c++;
+                S = Slog.get(c);
+            }
+
+            return S;
+
+        }
+
+        return S;
+    }
 }
