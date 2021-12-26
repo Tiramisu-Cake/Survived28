@@ -932,19 +932,18 @@ public class Level1 {
     // TASK 20
 
     static String S = "";
-    //static ArrayList<String> log = new ArrayList<>();
     static ArrayList<String> Slog = new ArrayList<>();
-    static int c = -1;
+    static int c = 0;
     static int u = 0;
 
     public static String BastShoe(String command) {
 
-        if (Slog.size() == 0) {
+        if (Slog.isEmpty()) {
             Slog.add("");
         }
         String p = "" + command.charAt(0);
         try {
-            int x = Integer.parseInt(p);
+            Integer.parseInt(p);
         }
         catch (Exception e) {
             return S;
@@ -953,14 +952,13 @@ public class Level1 {
 
 
 
-        String res = "";
         int n = command.length();
+        if (n > 1 && command.charAt(1) != ' ') {
+            x = -1;
+        }
 
-        if(x == 1) {
+        if(x == 1 && n > 1) {
 
-            if (command.charAt(1) != ' ') {
-                return S;
-            }
 
             if (u == 1) {
                 u = 0;
@@ -980,11 +978,9 @@ public class Level1 {
         }
 
 
-        if (x == 2) {
+        if (x == 2 && n > 1) {
 
-            if (command.charAt(1) != ' ') {
-                return S;
-            }
+
             if (u == 1) {
                 u = 0;
                 Slog.clear();
@@ -995,9 +991,8 @@ public class Level1 {
                 S1 += command.charAt(i);
             }
             try {
-                int y = Integer.parseInt(S1);
-            }
-            catch (Exception e) {
+                Integer.parseInt(S1);
+            } catch (Exception e) {
                 return S;
             }
             int y = Integer.parseInt(S1);
@@ -1013,38 +1008,32 @@ public class Level1 {
 
             Slog.add(S);
             c = Slog.size() - 1;
+
         }
 
         if (x == 3) {
-
-            if (command.charAt(1) != ' ') {
-                return S;
-            }
 
             String S1 = "";
             for (int i = 2; i < n; i++) {
                 S1 += command.charAt(i);
             }
             try {
-                int y = Integer.parseInt(S1);
+                Integer.parseInt(S1);
             }
             catch (Exception e) {
                 return S;
             }
+
             int y = Integer.parseInt(S1);
 
             if (y >= S.length() || y < 0) {
                 return "";
             }
 
-            return String.valueOf(S.charAt(y));
+            S = String.valueOf(S.charAt(y));
 
         }
-        if (x == 4) {
-
-            if (command.length() > 1) {
-                return S;
-            }
+        if (x == 4 && n == 1) {
 
             u = 1;
             int k = Slog.size();
@@ -1052,25 +1041,15 @@ public class Level1 {
                 c--;
                 S = Slog.get(c);
             }
-            if (c == 0) {
-                return S;
-            }
-
 
         }
-        if (x == 5) {
-
-            if (command.length() > 1) {
-                return S;
-            }
+        if (x == 5 && n == 1) {
 
             int k = Slog.size();
-            if (k > c + 1) {
+            if (c < k - 1) {
                 c++;
                 S = Slog.get(c);
             }
-
-            return S;
 
         }
 
