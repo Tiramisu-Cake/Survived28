@@ -1138,4 +1138,63 @@ public class Level1 {
 
         return res;
     }
+
+    // TASK 22
+
+    public static void swapChar(char[] Arr, int i1, int i2) {
+        char x = Arr[i1];
+        Arr[i1] = Arr[i2];
+        Arr[i2] = x;
+    }
+    public static boolean SherlockValidString(String s) {
+        int n = s.length();
+        char[] pass = s.toCharArray();
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (pass[i] >= pass[j]) {
+                    swapChar(pass, i, j);
+                }
+            }
+        }
+
+        ArrayList<Integer> Counts = new ArrayList<>();
+        int k = 1;
+        for (int i = 0; i < n - 1; i++) {
+            if (pass[i] == pass[i+1]) {
+                k++;
+            } else {
+                Counts.add(k);
+                k = 1;
+            }
+        }
+        Counts.add(k);
+
+        boolean res = true;
+        k = Counts.size();
+        int j = 0;
+        for (int i = 0; i < k; i++) {
+            int z = Counts.get(i);
+            for (int y : Counts) {
+                int x = z - y;
+                if (x != 0) {
+                    if (Math.abs(x) > 1) {
+                        res = false;
+                        break;
+                    }
+                    if (x < 0) {
+                        j++;
+                    }
+                }
+            }
+            if (j > 1 || res == false) {
+                res = false;
+                break;
+            }
+            j = 0;
+        }
+
+        return res;
+
+    }
 }
