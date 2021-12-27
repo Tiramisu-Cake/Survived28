@@ -1055,4 +1055,87 @@ public class Level1 {
 
         return S;
     }
+
+    // TASK 21
+
+    public static String BiggerGreater(String input) {
+        int n = input.length();
+        String[] input_c = new String[n];
+
+        for (int i = 0; i<n; i++) {
+            input_c[i] = "" + input.charAt(i);
+        }
+
+        int r = 0;
+        for (int i = 1; i<n; i++) {
+            if (input_c[i].compareTo(input_c[i-1]) <= 0) {
+                r++;
+            }
+        }
+
+        if (r >= n - 1) {
+            return "";
+        }
+
+        if (n == 2) {
+            swapString(input_c,0,1);
+            return String.join("", input_c);
+        }
+
+        String res = "";
+        int p = 0;
+        for (int i = n - 1; i > 0; i--) {
+            String S = "" + input.charAt(i);
+            for (int j = i - 1; j > 0; j--) {
+
+                if (S.compareTo(input_c[j]) > 0) {
+                    swapString(input_c, j, i);
+                        for (int k = j + 1; k < n - 1; k++) {
+                            for (int s = k + 1; s < n; s++) {
+                                if (input_c[k].compareTo(input_c[s]) > 0) {
+                                    swapString(input_c, k, s);
+                                }
+                            }
+                        }
+                    res = String.join("", input_c);
+                    if (res.compareTo(input) > 0) {
+                        p++;
+                        break;
+                    }
+                }
+
+            }
+            if (p != 0) {
+                break;
+            }
+        }
+
+        if (p == 0) {
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = i + 1; j < n; j++) {
+                    if (input_c[i].compareTo(input_c[j]) > 0) {
+                        swapString(input_c, j, i);
+                    }
+                }
+            }
+
+            for (int j = 0; j < n; j++) {
+                if (input_c[j].compareTo("" + input.charAt(0)) > 0 ) {
+                    swapString(input_c,j,0);
+                    break;
+                }
+            }
+
+            for (int i = 1; i < n - 1; i++) {
+                for (int j = i + 1; j < n; j++) {
+                    if (input_c[i].compareTo(input_c[j]) > 0) {
+                        swapString(input_c, j, i);
+                    }
+                }
+            }
+            res = String.join("", input_c);
+        }
+
+        return res;
+    }
 }
