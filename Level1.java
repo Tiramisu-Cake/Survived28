@@ -1261,4 +1261,65 @@ public class Level1 {
 
         return res;
     }
+
+    // TASK 24
+
+    public static void MatrixTurn(String[] Matrix, int M, int N, int T) {
+
+        int min = M;
+        if (min > N) {
+            min = N;
+        }
+
+        int[][] Mat = new int[M][N];
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                Mat[i][j] = Integer.parseInt("" + Matrix[i].charAt(j));
+            }
+        }
+
+        int[][] Mat_c = new int[M][N];
+
+        for (int s = 0; s < T; s++) {
+
+            for (int i = 0; i < M; i++) {
+                for (int j = 0; j < N; j++) {
+                    Mat_c[i][j] = Mat[i][j];
+                }
+            }
+
+            //Angles
+            for (int i = 0; i < min / 2; i++) {
+                Mat[i][i] = Mat_c[i + 1][i];
+                Mat[i][N - i - 1] = Mat_c[i][N - i - 2];
+                Mat[M - i - 1][i] = Mat_c[M - i - 1][i + 1];
+                Mat[M - i - 1][N - i - 1] = Mat_c[M - i - 2][N - i - 1];
+            }
+
+            //Rows
+            for (int i = 0; i < min / 2; i++) {
+                for (int j = i + 1; j < N - i - 1; j++) {
+                    Mat[i][j] = Mat_c[i][j - 1];
+                    Mat[M - i - 1][N - j - 1] = Mat_c[M - i - 1][N - j];
+                }
+            }
+
+            //Columns
+            for (int i = 0; i < min / 2; i++) {
+                for (int j = i + 1; j < M - i - 1; j++) {
+                    Mat[j][i] = Mat_c[j + 1][i];
+                    Mat[M - j - 1][N - i - 1] = Mat_c[M - j - 2][N - i - 1];
+                }
+            }
+
+        }
+
+        for (int i = 0; i < M; i++) {
+            Matrix[i] = "";
+            for (int j = 0; j < N; j++) {
+                Matrix[i] += Mat[i][j];
+            }
+        }
+
+    }
 }
