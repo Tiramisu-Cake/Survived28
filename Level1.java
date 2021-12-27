@@ -1197,4 +1197,68 @@ public class Level1 {
         return res;
 
     }
+
+    // TASK 23
+    public static String [] TreeOfLife(int H, int W, int N, String [] tree) {
+        int[][] tree_c = new int[H][W];
+
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < W; j++) {
+                if (tree[i].charAt(j) == '.') {
+                    tree_c[i][j] = 0;
+                } else {
+                    tree_c[i][j] = 1;
+                }
+            }
+        }
+
+        for (int i = 0; i < N; i++) {
+
+            for (int k = 0; k < H; k++) {
+                for (int j = 0; j < W; j++) {
+                    tree_c[k][j]++;
+                }
+            }
+
+            if (i % 2 == 1) {
+                for (int k = 0; k < H; k++) {
+                    for (int j = 0; j < W; j++) {
+                        if (tree_c[k][j] > 2) {
+                            tree_c[k][j] = 0;
+                            if (k > 0) {
+                                tree_c[k - 1][j] = 0;
+                            }
+                            if (j > 0) {
+                                tree_c[k][j - 1] = 0;
+                            }
+                            if (k < H - 1) {
+                                if (tree_c[k+1][j] < 3) {
+                                    tree_c[k + 1][j] = 0;
+                                }
+                            }
+                            if (j < W - 1) {
+                                if (tree_c[k][j+1] < 3) {
+                                    tree_c[k][j + 1] = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        String[] res = new String[H];
+        for (int i = 0; i < H; i++) {
+            res[i] = "";
+            for (int j = 0; j < W; j++) {
+                if (tree_c[i][j] > 0) {
+                    res[i] += "+" ;
+                } else {
+                    res[i] += ".";
+                }
+            }
+        }
+
+        return res;
+    }
 }
