@@ -1322,4 +1322,43 @@ public class Level1 {
         }
 
     }
+
+    // TASK 25
+
+    public static int[] Transform(int[] A, int N) {
+        ArrayList<Integer> B = new ArrayList<>();
+
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = 0; j < N - i - 1; j++) {
+                int k = i+j;
+                int[] C = new int[k - j + 1];
+                for (int s = 0; s < C.length; s++) {
+                    C[s] = A[j+s];
+                }
+                for (int s = 1; s < C.length; s++) {
+                    if (C[0] < C[s]) {
+                        swapInt(C, 0, s);
+                    }
+                }
+                B.add(C[0]);
+            }
+        }
+
+        int[] C = B.stream().mapToInt(i -> i).toArray();
+
+        return C;
+    }
+    public static boolean TransformTransform(int[] A, int N) {
+        int[] B1 = Transform(A, N);
+        int[] B2 = Transform(B1, B1.length);
+
+        int res = 0;
+        for (int x : B2) {
+            res += x;
+        }
+        if (res % 2 == 0) {
+            return true;
+        }
+        return false;
+    }
 }
