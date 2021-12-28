@@ -1404,4 +1404,68 @@ public class Level1 {
         return false;
 
     }
+
+    // TASK 27
+
+    public static void SortBack(int[] A, int s, int t) {
+        int i = 0;
+        while (s + i < t - i) {
+            swapInt(A, s + i, t - i);
+            i++;
+        }
+    }
+    public static boolean Football(int F[], int N) {
+        int[] F_c = F.clone(), Ideal = F.clone();
+
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = i+1; j < N; j++)
+            if (Ideal[i] > Ideal[j]) {
+                swapInt(Ideal, i, j);
+            }
+        }
+
+        int p = 0;
+        for (int i = 0; i < N -1; i++) {
+            for (int j = i+1; j < N; j++) {
+                if (F_c[i] > F_c[j]) {
+                    int x = F_c[i];
+                    for (int k = j ; k < N; k++) {
+                        if (x < F_c[k]) {
+                            swapInt(F_c, i, k-1);
+
+                            if (!Arrays.equals(F_c, Ideal)) {
+                                swapInt(F_c, i, k-1);
+                                SortBack(F_c, i, k-1);
+
+                            }
+                            p = 1;
+                            break;
+                        }
+                        if (k == N - 1) {
+                            swapInt(F_c, i, k);
+
+                            if (!Arrays.equals(F_c, Ideal)) {
+                                swapInt(F_c, i, k);
+                                SortBack(F_c, i, k);
+                            }
+                            p = 1;
+                            break;
+                        }
+                    }
+                }
+                if (p == 1) {
+                    break;
+                }
+            }
+            if (p == 1) {
+                break;
+            }
+        }
+
+        if (!Arrays.equals(F_c, Ideal)) {
+            return false;
+        }
+
+        return true;
+    }
 }
