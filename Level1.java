@@ -1472,4 +1472,30 @@ public class Level1 {
 
         return true;
     }
+
+    // TASK 28
+
+    public static String Keymaker(int k) {
+
+        boolean[] doors = new boolean[k];
+
+        for (int i = 0; i < k; i++) {
+            doors[i] = !doors[i];
+        }
+
+        for (int i = 1; i < k; i++) {
+            for (int s = i; s < k; s += i + 1) {
+                doors[s] = !doors[s];
+            }
+        }
+        String res = "";
+        for (int i = 0; i < k; i++) {
+            if (doors[i]) {
+                res += "1";
+            } else {
+                res += "0";
+            }
+        }
+        return res;
+    }
 }
