@@ -1359,4 +1359,49 @@ public class Level1 {
 
         return false;
     }
+
+    // TASK 26
+
+    public static boolean white_walkers(String village) {
+
+        char[] c = village.toCharArray();
+        int pairs = 0;
+        int eq = 0;
+        int r = 0;
+        for (int i = 0; i < c.length - 1; i++) {
+            if (eq % 3 != 0) {
+                r = 1;
+                break;
+            }
+            int x = c[i]-'0';
+            if (x >= 0 && x <= 9) {
+                for (int j = i + 1; j < c.length; j++) {
+                    int y = c[j]-'0';
+                    if (y >= 0 && y <= 9) {
+                        if (y+x == 10) {
+                            pairs++;
+                            for (int k = i + 1; k < j; k++) {
+                                if (c[k] == '=') {
+                                    eq++;
+                                }
+                            }
+                        }
+                        i = j - 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (pairs == 0 || eq == 0 || r == 1) {
+            return false;
+        }
+        double res = (eq * 1.0) / 3;
+
+        if (res == pairs) {
+            return true;
+        }
+        return false;
+
+    }
 }
