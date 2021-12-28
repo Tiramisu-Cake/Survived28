@@ -1,7 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Level1 {
     // TASK 1
@@ -1326,21 +1325,18 @@ public class Level1 {
     // TASK 25
 
     public static int[] Transform(int[] A, int N) {
-        ArrayList<Integer> B = new ArrayList<>();
+        List<Integer> B = new ArrayList<>();
 
-        for (int i = 0; i < N - 1; i++) {
-            for (int j = 0; j < N - i - 1; j++) {
-                int k = i+j;
-                int[] C = new int[k - j + 1];
-                for (int s = 0; s < C.length; s++) {
-                    C[s] = A[j+s];
-                }
-                for (int s = 1; s < C.length; s++) {
-                    if (C[0] < C[s]) {
-                        swapInt(C, 0, s);
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N - i; j++) {
+                int k = i + j;
+                int x = A[j];
+                for (int s = j + 1; s <= k; s++) {
+                    if (x < A[s]) {
+                        x = A[s];
                     }
                 }
-                B.add(C[0]);
+                B.add(x);
             }
         }
 
@@ -1356,9 +1352,11 @@ public class Level1 {
         for (int x : B2) {
             res += x;
         }
+
         if (res % 2 == 0) {
             return true;
         }
+
         return false;
     }
 }
